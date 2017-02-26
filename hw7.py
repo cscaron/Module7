@@ -96,13 +96,13 @@ while menu_choice != 5:
     # remove an entry
     elif menu_choice == 3:
         print("Remove User")
-        name = input("Name: ")
+        name = input("Name or Username: ")
         if name in usernames:# or name in usernames.values():
             #pass # delete that entry
             del usernames[name]
-#        elif name in list(usernames.values()):#stole this bit from stack overflow, still trying to make it work
-#            name2 = list(usernames.keys().index(usernames.values()))
-#            del usernames[name2]
+        elif name in list(usernames.values()):#stole this bit from stack overflow
+            name2 = list(usernames.keys())[list(usernames.values()).index(name)]
+            del usernames[name2]
 
     # view user name      
     elif menu_choice == 4:
