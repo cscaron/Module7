@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 """
+Intro to Python HW 7
 Created on Sat Feb 25 14:37:15 2017
 
-@author: csc
-"""
-#added comment
+@author: Chad Caron
 
-from collections import OrderedDict
+notes: this program demonstrates user input handling from the command line.
+"""
+#added comment 
+
+#from collections import OrderedDict
 from sortedcontainers import SortedDict
 
 """
@@ -49,7 +52,7 @@ def print_menu():
     print('1. Print Users')
     print('2. Add a User')
     print('3. Remove a User')
-    print('4. Lookup a Phone Number')
+    print('4. Lookup a User Name')
     print('5. Quit')
     print()
 
@@ -70,8 +73,13 @@ print_menu()
 # as long as the menu choice isn't "quit" get user options
 while menu_choice != 5:
     # get menu choice from user
-    menu_choice = int(input("Type in a number (1-5): "))
-    
+    try:
+        menu_choice = int(input("Type in a number (1-5): "))
+    except ValueError:
+        print("Please input an INTEGER 1-5...")
+        menu_choice = ()
+        #raise ValueError
+        
     # view current entries
     if menu_choice == 1:
         print("Current Users:")
@@ -89,18 +97,22 @@ while menu_choice != 5:
     elif menu_choice == 3:
         print("Remove User")
         name = input("Name: ")
-        if name in usernames:
-            pass # delete that entry
+        if name in usernames:# or name in usernames.values():
+            #pass # delete that entry
+            del usernames[name]
+#        elif name in list(usernames.values()):#stole this bit from stack overflow, still trying to make it work
+#            name2 = list(usernames.keys().index(usernames.values()))
+#            del usernames[name2]
 
     # view user name      
     elif menu_choice == 4:
         print("Lookup User")
         name = input("Name: ")
         if name in usernames:
-            pass # print the username
+            print("the Username for {} is {}.".format(name, usernames[name]))
         else:
-            pass # print username not found
-    
+            print("the Username {} is not in the dictionary.".format(name))
+
     # is user enters something strange, show them the menu
     elif menu_choice != 5:
         print_menu()
